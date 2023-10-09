@@ -1,6 +1,6 @@
 # Cloud Resume Challenge
 
-![Architecture](\front-end\images\cloud-resume-architecture.png)
+![Architecture](front-end/images/cloud-resume-architecture.png)
 
 This repository contains the code and infrastructure as code (IaC) scripts for my cloud-hosted resume. The application is hosted on AWS, leveraging services such as S3, CloudFront, and Lambda.
 This project was done as part of a challenge to test my abilities using AWS cloud resources as a newly certified AWS Solutions Architect Associate and practice creating a practical infrastructure.
