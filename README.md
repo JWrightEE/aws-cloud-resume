@@ -9,13 +9,12 @@ This project was done as part of a challenge to test my abilities using AWS clou
 
 ## Table of Contents
 
-- [Challenge Goals](#challenge-goals)
+- [Challenge Overview](#challenge-overview)
 - [Challenge Stages](#challenge-stages)
-  - [Certification](#certification)
-  - [Frontend](#frontend)
-  - [API](#api)
-  - [Backend & Integration](#backend--integration)
-  - [CI/CD and Automation](#cicd-and-automation)
+  - [Certification](#1-certification)
+  - [Frontend](#2-frontend)
+  - [API & Backend](#3-api--backend)
+  - [CI/CD and Automation](#4-cicd-and-automation)
 
 ## Challenge Overview
 
@@ -44,28 +43,58 @@ This section is about building the visual design of the resume using HTML, CSS, 
 
 #### 2.1  HTML & CSS
 
-For the HTML portion of the website, I styled it after the sections of my normal resume with CSS styling to provide a somewhat modern design with some visual transitions.
+For the HTML portion of the website, I created [`front-end/index.html`](front-end/index.html) and based it on the sections of my normal resume with CSS styling to provide a somewhat modern design with some visual transitions.
 Prior to this I had little to no experience writing HTML or CSS code, so I started with a template and made adjustments where needed for the basics. Then I made larger design changes to fit my overall design view.
 
 The website contains separated sections that would typically be seen on a resume such as personal information, skills, work experience, education, certification, and personal projects. I also included links to my relevant socials as well as a link to download a copy of my official resume in pdf format.
 
-The HTML code used for the website can be found [here](front-end/index.html)
-
 #### 2.2  JavaScript
 
-JavaScript
+JavaScript was used to tackle one of the challenge tasks which was to create a visitor counter for the website. This was added to the index file and works with an AWS API and DynamoDB table on the backend to preserve the visitor count.
 
-#### 2.3  Static Assets
+More on this in the Backend and Integration section.
+
+#### 2.4  Static Asset Hosting
+
+The html code along with all supporting files are hosted on an AWS S3 bucket with static hosting enabled and public read-only permission. Because S3 static website hosting doesnt offer HTTPS functionality, I used CLoudFront to provide HTTPS functionality.
+
+More on that in the following section.
+
 #### 2.4  CloudFront
 
-### 3. API
+In order to provide HTTPS functionality, I created a CloudFront distribution. By using CloudFront, I was able to set the S3 bucket as the origin and assign an SSL certificate obtained using ACM.
 
-Detail the creation of the API, its endpoints, and how it interacts with the frontend and backend.
+#### 2.5  Route 53
 
-### 4. Backend & Integration
+In order to access the website, I registered a domain using Route 53 which points the DNS domain name at the CloudFront distribution.
 
-Explain the backend infrastructure, including databases and serverless functions, and how they integrate with the frontend and API.
+### 3. API & Backend
 
-### 5. CI/CD and Automation
+The API serves as an intermediary between the websites frontend (the JS running in the browser) and the backend infrastructure, which for this project is Lambda and DynamoDB.
+Its primary purpose is to allow the frontend to retrieve and update the visitor count without directly accessing the database, ensuring a greater level of security and scalability (if needed).
 
-Describe the continuous integration, continuous deployment, and automation processes set up for this project, including any tools and workflows used.
+#### 3.1  DynamoDB
+
+I set up a table in DynamoDB called VisitorCount with a single item called myWebsite which tracks the number of site visits.
+
+#### 3.2  Lambda
+
+Using [`backend/IncrementVisitorCount.py`](backend/IncrementVisitorCount.py), I created a Lambda function that fetches the current visitor count from DynamoDB, increments it, and then returns the updated count to the API Gateway.
+
+#### 3.3  API Gateway
+
+The purpose of the API Gateway is to provide an endpoint for the JavaScript to call to get or update the visitor count. This call triggers the Lambda function.
+
+### 4. CI/CD and Automation
+
+#### 4.1 CI/CD
+
+To automate any code or configuration changes to the frontend, GitHub Actions were used along with a dedicated pipeline workflow. All steps and stages can be seen in the [`.github/workflows/front-end-cicd.yml`](.github/workflows/front-end-cicd.yml)
+
+Whenever a change is pushed to any frontend files in this GitHub repo, the workflow will run and automatically update the files in the S3 Bucket.
+
+#### 4.2 Infrastructure as Code (IaC)
+
+***IN PROGRESS***
+
+The last step of this project is to manage the AWS resources using an IaC solutions such as SAM or Terraform. I've started a Terraform project and I have most of the AWS infrastructure imported. I need to fix a few things and test a full deployment before adding it here. 
