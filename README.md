@@ -2,8 +2,8 @@
 
 ![Architecture](front-end/images/cloud-resume-architecture.png)
 
-This repository contains the code and infrastructure as code (IaC) scripts for my cloud-hosted resume. The application is hosted on AWS, leveraging services such as S3, CloudFront, and Lambda.
-This project was done as part of a challenge to test my abilities using AWS cloud resources as a newly certified AWS Solutions Architect Associate and practice creating a practical infrastructure.
+This repository contains the code and Infrastructure as Code (IaC) scripts for my cloud-hosted resume. The application is hosted on AWS, leveraging services such as S3, CloudFront, and Lambda.
+I undertook this project as part of a challenge to test my AWS cloud resource skills as a newly certified AWS Solutions Architect Associate and to gain practical experience in creating infrastructure.
 
 [Website Link](https://justinwright-engineering.com)
 
@@ -18,18 +18,20 @@ This project was done as part of a challenge to test my abilities using AWS clou
 
 ## Challenge Overview
 
-The Cloud Resume Challenge is a popular cloud architect/engineer challenge aimed at showcasing and improving typical cloud architecture skills while also improving resume visibility.
-The Cloud Resume Challenge serves as a platform for individuals to practice, demonstrate, and improve their cloud skills through the following methods:
+The Cloud Resume Challenge is a popular challenge for aspiring cloud architects and engineers, aimed at showcasing and enhancing typical cloud architecture skills while also improving resume visibility.
+This challenge provides a platform for individuals to practice, demonstrate, and improve their cloud skills through the following means:
 
 #### Hands-on Experience
+
 The challenge is designed as a hands-on project to build and demonstrate skills essential for a career as an AWS Cloud Engineer. Participants are required to construct a personal resume or portfolio website and include a visitor counter on the site. The project must be entirely deployed using various AWS services, providing a practical learning experience in handling cloud resources
 
 #### Skill Development
+
 It aids participants in developing crucial cloud skills, including setting up serverless applications, CI/CD pipelines, networking, and ensuring security. This aspect of the challenge is vital as it provides a real-world scenario for applying theoretical knowledge obtained from cloud certifications
 
 #### Resume Enhancement
-By participating in the challenge, individuals have the opportunity to enhance their resumes. The challenge allows them to present their resumes using cloud technologies, which not only showcases their technical skills but also makes their resumes more publicly and easily accessible.
 
+By participating in the challenge, individuals have the opportunity to enhance their resumes. The challenge allows them to present their resumes using cloud technologies, which not only showcases their technical skills but also makes their resumes more publicly and easily accessible.
 
 ## Challenge Stages
 
@@ -39,12 +41,11 @@ The first part of the challenge is to complete the AWS Cloud Practitioner certif
 
 ### 2. Frontend
 
-This section is about building the visual design of the resume using HTML, CSS, and JavaScript. It doesn't need to be fancy, but it should have some styling rather than a raw HTML page.
+This section details the creation of the visual design of the resume using HTML, CSS, and JavaScript. While the design doesn't need to be intricate, it should exhibit some styling beyond a raw HTML page.
 
 #### 2.1  HTML & CSS
 
-For the HTML portion of the website, I created [`front-end/index.html`](front-end/index.html) and based it on the sections of my normal resume with CSS styling to provide a somewhat modern design with some visual transitions.
-Prior to this I had little to no experience writing HTML or CSS code, so I started with a template and made adjustments where needed for the basics. Then I made larger design changes to fit my overall design view.
+For the HTML portion of the website, I created [`front-end/index.html`](front-end/index.html) and based it on the sections of my normal resume with CSS styling to provide a somewhat modern design with some visual transitions. Prior to this, I had little to no experience writing HTML or CSS code, so I started with a template and made necessary adjustments to cover the basics. Then, I made larger design changes to align with my overall design vision.
 
 The website contains separated sections that would typically be seen on a resume such as personal information, skills, work experience, education, certification, and personal projects. I also included links to my relevant socials as well as a link to download a copy of my official resume in pdf format.
 
@@ -54,11 +55,11 @@ JavaScript was used to tackle one of the challenge tasks which was to create a v
 
 More on this in the Backend and Integration section.
 
-#### 2.4  Static Asset Hosting
+#### 2.3  Static Asset Hosting
 
-The html code along with all supporting files are hosted on an AWS S3 bucket with static hosting enabled and public read-only permission. Because S3 static website hosting doesnt offer HTTPS functionality, I used CLoudFront to provide HTTPS functionality.
+The HTML code, along with all supporting files, are hosted on an AWS S3 bucket with static hosting enabled and public read-only permissions. Since S3 static website hosting doesn't offer HTTPS functionality, I utilized CloudFront to provide HTTPS functionality.
 
-More on that in the following section.
+More on this in the following section.
 
 #### 2.4  CloudFront
 
@@ -71,7 +72,7 @@ In order to access the website, I registered a domain using Route 53 which point
 ### 3. API & Backend
 
 The API serves as an intermediary between the websites frontend (the JS running in the browser) and the backend infrastructure, which for this project is Lambda and DynamoDB.
-Its primary purpose is to allow the frontend to retrieve and update the visitor count without directly accessing the database, ensuring a greater level of security and scalability (if needed).
+Its primary purpose is to enable the frontend to retrieve and update the visitor count without directly accessing the database, thus ensuring a higher level of security and scalability (if needed).
 
 #### 3.1  DynamoDB
 
@@ -97,4 +98,4 @@ Whenever a change is pushed to any frontend files in this GitHub repo, the workf
 
 ***IN PROGRESS***
 
-The last step of this project is to manage the AWS resources using an IaC solutions such as SAM or Terraform. I've started a Terraform project and I have most of the AWS infrastructure imported. I need to fix a few things and test a full deployment before adding it here. 
+The final step of this project is to manage the AWS resources using an IaC solution such as SAM or Terraform. I've initiated a Terraform project and have imported most of the AWS infrastructure. A few aspects need fixing and a full deployment test is pending before integrating it here. 
