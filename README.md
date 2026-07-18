@@ -5,6 +5,8 @@
 This repository contains the code and Infrastructure as Code (IaC) scripts for my cloud-hosted resume. The application is hosted on AWS, leveraging services such as S3, CloudFront, and Lambda.
 I undertook this project as part of a challenge to test my AWS cloud resource skills as a newly certified AWS Solutions Architect Associate and to gain practical experience in creating infrastructure.
 
+UPDATE: As of 7/18/26, this project has been archived and the domain is no longer accessible.
+
 [Website Link](https://justinwright-engineering.com)
 
 ## Table of Contents
